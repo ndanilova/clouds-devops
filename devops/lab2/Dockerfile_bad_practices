@@ -1,0 +1,20 @@
+# didn't specified version
+FROM python:3
+
+# apt instead of apt-get, didn't specified versions via pip
+# didn't use "--no-install-recommends" what potentially increased size of my docker
+# no apt-get cache deleting
+RUN apt update && apt install -y \
+    wget \
+    vim-tiny \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY main.py /app/
+
+# used RUN instead of WORKDIR
+RUN cd /app/
+
+# using the cache directory and didn't specified version
+RUN pip install flask
+
+CMD ["python", "/app/main.py"]
