@@ -61,12 +61,5 @@ jobs:
       # Шаг 4: Запускаем тесты и проверяем покрытие
       - name: Run tests with coverage
         run: pytest --cov=src --cov-report term tests/
-
-      # Шаг 5: Сохраняем отчет о покрытии
-      - name: Upload coverage report
-        uses: actions/upload-artifact@v3
-        with:
-          name: coverage-report
-          path: htmlcov/
     
       
