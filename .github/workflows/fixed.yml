@@ -1,5 +1,9 @@
 name: Python CI
 
+defaults:
+      run:
+        working-directory: ./devops/lab3
+
 on:
   push:
     branches:
