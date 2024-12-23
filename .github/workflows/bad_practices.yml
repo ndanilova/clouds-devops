@@ -28,6 +28,7 @@ jobs:
       # установка зависимостей без использования кэша
       - name: Install dependencies
         run: |
+          echo ~
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
