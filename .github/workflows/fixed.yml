@@ -1,4 +1,4 @@
-name: Python CI - Fixed
+name: Python CI - Debugging Issue
 
 defaults:
   run:
@@ -6,19 +6,22 @@ defaults:
 
 on:
   push:
-    branches: 
+    branches:
       - main
   pull_request:
     branches:
       - main
 
 jobs:
-  setup: # отдельный шаг для установки питона и клонирования репозитория во избежание дублирования кода 
+  setup:
     name: Setup Environment
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+
+      - name: Verify directory exists
+        run: test -d ./devops/lab3 && echo "Directory exists" || (echo "Directory missing" && exit 1)
 
       - name: Set up Python
         uses: actions/setup-python@v4
@@ -44,8 +47,7 @@ jobs:
           pip install -r requirements.txt
 
       - name: Verify Build
-        run: |
-          echo "Build successful"
+        run: echo "Build successful"
 
   test:
     name: Run Tests
