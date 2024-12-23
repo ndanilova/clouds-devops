@@ -1,5 +1,9 @@
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../src")))
+
 import unittest
-from src.main import get_excessive_letter
+from main import get_excessive_letter  # Теперь Python сможет найти main.py в папке src.
 
 class TestGetExcessiveLetter(unittest.TestCase):
     def test_basic_case(self):
