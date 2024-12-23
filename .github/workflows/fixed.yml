@@ -1,4 +1,4 @@
-name: Python CI - Fixed Practices
+name: Python CI - Best Practices
 
 defaults:
   run:
@@ -6,11 +6,11 @@ defaults:
 
 on:
   push:
-    branches: # ограничение по веткам для запуска сборки
-      - 'main'   # Запуск только для основной ветки, чтобы избежать сборки для каждой ветки
+    branches:
+      - 'main'
   pull_request:
     branches:
-      - 'main'   # Запуск только для PR в основную ветку
+      - 'main'
 
 jobs:
   build:
@@ -25,7 +25,6 @@ jobs:
         with:
           python-version: '3.10'
 
-      # Использование кэширования для ускорения установки зависимостей
       - name: Cache dependencies
         uses: actions/cache@v3
         with:
@@ -42,28 +41,6 @@ jobs:
       - name: Verify Build
         run: |
           echo "Build successful"
-
-  test:
-    name: Run Tests
-    runs-on: ubuntu-latest
-    needs: build   # Обеспечиваем, что тесты выполняются только после сборки
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.10'
-
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
-
-      - name: Run tests with coverage   # Добавили запуск тестов с покрытием
-        run: |
-          pytest --cov=your_package tests/
 
   lint:
     name: Lint Code
@@ -82,11 +59,31 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      # Добавлен линтинг с использованием flake8 для проверки качества кода
-      - name: Lint code with flake8
+      - name: Run linter (flake8)
         run: |
-          pip install flake8
-          flake8 your_package tests
+          flake8 src  # Линтинг для папки src
+
+  test:
+    name: Run Tests
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run tests with coverage
+        run: |
+          pytest --cov=src tests/  # Покрытие кода для src, тесты в папке tests
 
   deploy:
     name: Deploy Project
@@ -105,8 +102,6 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      # Обеспечиваем, что развертывание происходит только после успешного прохождения тестов
       - name: Deploy with testing
         run: |
           echo "Deploying application after successful tests"
-          
