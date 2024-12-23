@@ -39,13 +39,10 @@ jobs:
     name: Run Tests
     runs-on: ubuntu-latest
     # отсутствие зависимости между задачами build и test
-    needs: build
     steps:
-      # (дублирование кода)
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # (дублирование кода)
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
