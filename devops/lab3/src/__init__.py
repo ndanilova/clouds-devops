@@ -1,7 +1,7 @@
 import sys
 import os
 import unittest
-from main import get_excessive_letter 
+from main import get_excessive_letter
 
 sys.path.append(
     os.path.abspath(
@@ -9,11 +9,9 @@ sys.path.append(
     )
 )
 
-
 class TestGetExcessiveLetter(unittest.TestCase):
     def test_basic_case(self):
         self.assertEqual(get_excessive_letter("abc", "abca"), "a")
-
 
 if __name__ == "__main__":
     unittest.main()
