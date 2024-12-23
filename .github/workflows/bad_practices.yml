@@ -105,11 +105,3 @@ jobs:
         run: |
           echo "Deploying application without tests"
           
-  monitor:
-    name: Monitor CI/CD Pipeline
-    runs-on: ubuntu-latest
-    steps:
-      # отсутствие мониторинга или оповещений
-      - name: Set up monitoring
-        run: |
-          echo "Monitoring is not configured"
