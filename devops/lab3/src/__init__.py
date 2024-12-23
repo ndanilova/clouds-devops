@@ -1,14 +1,13 @@
 import sys
 import os
 import unittest
+from main import get_excessive_letter 
 
 sys.path.append(
     os.path.abspath(
         os.path.join(os.path.dirname(__file__), "../src")
     )
 )
-
-from main import get_excessive_letter  
 
 
 class TestGetExcessiveLetter(unittest.TestCase):
