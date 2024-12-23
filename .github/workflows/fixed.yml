@@ -45,6 +45,7 @@ jobs:
   lint:
     name: Lint Code
     runs-on: ubuntu-latest
+    needs: build
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -88,6 +89,7 @@ jobs:
   deploy:
     name: Deploy Project
     runs-on: ubuntu-latest
+    needs: test
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
