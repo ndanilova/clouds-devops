@@ -1,4 +1,4 @@
-name: Python CI - Best Practices
+name: Python CI - Fixed Practices
 
 defaults:
   run:
@@ -110,12 +110,3 @@ jobs:
         run: |
           echo "Deploying application after successful tests"
           
-  monitor:
-    name: Monitor CI/CD Pipeline
-    runs-on: ubuntu-latest
-    steps:
-      # Добавили мониторинг с использованием инструментов (например, CloudWatch или Prometheus)
-      - name: Set up monitoring tools
-        run: |
-          echo "Configuring monitoring for CI/CD pipeline"
-          # Например, можно настроить CloudWatch или Prometheus для отслеживания состояния
