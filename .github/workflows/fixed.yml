@@ -83,7 +83,7 @@ jobs:
 
       - name: Run tests with coverage
         run: |
-          pytest --cov=src tests/  # Покрытие кода для src, тесты в папке tests
+          pytest --cov=src tests  # Покрытие кода для src, тесты в папке tests
 
   deploy:
     name: Deploy Project
