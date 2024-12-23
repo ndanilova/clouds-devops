@@ -2,7 +2,7 @@ name: Python CI - Fixed
 
 defaults:
   run:
-    working-directory: ../../devops/lab3
+    working-directory: ../devops/lab3
 
 on:
   push:
