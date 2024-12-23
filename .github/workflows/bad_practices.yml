@@ -1,0 +1,61 @@
+name: Python CI - Bad Practices
+
+defaults:
+  run:
+    working-directory: ./devops/lab3
+
+on:
+  push:
+    branches: # запуск сборки без ограничения по веткам
+      - '*'
+  pull_request:
+    branches:
+      - '*'
+
+jobs:
+  build:
+    name: Build Project
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      # установка зависимостей без использования кэша
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Verify Build
+        run: |
+          echo "Build successful"
+
+  test:
+    name: Run Tests
+    runs-on: ubuntu-latest
+    # отсутствие зависимости между задачами build и test
+    steps:
+      # (дублирование кода)
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # (дублирование кода)
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      # установка зависимости без использования кэша (дублирование кода)
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      # запуск тесты без результатов покрытия
+      - name: Run tests without coverage
+        run: pytest tests/
