@@ -1,4 +1,4 @@
-name: Python CI - Best Practices
+name: Python CI - Fixed Practices
 
 defaults:
   run:
