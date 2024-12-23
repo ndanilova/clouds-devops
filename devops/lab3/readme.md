@@ -201,6 +201,7 @@ jobs:
   lint:
     name: Lint Code
     runs-on: ubuntu-latest
+    needs: build
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -222,7 +223,7 @@ jobs:
   test:
     name: Run Tests
     runs-on: ubuntu-latest
-    needs: build
+    needs: build # Добавлена зависимость от билда
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -244,6 +245,7 @@ jobs:
   deploy:
     name: Deploy Project
     runs-on: ubuntu-latest
+    needs: test # Сделана зависимость от результата тестов
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -263,9 +265,25 @@ jobs:
           echo "Deploying application after successful tests"
 
 ```
+Теперь запустим "хороший" `CI / CD и посмотрим результат:
 
 ![alt text](image.png)
+
+Билд:
+
 ![alt text](image-1.png)
+
+Линт:
+
 ![alt text](image-2.png)
-![alt text](image-3.png)
+
+Тесты:
+
+![alt text](image-6.png)
+
+Деплой:
+
 ![alt text](image-4.png)
+
+# Вывод:
+При выполнении этой лабораторной работы я познакомилась поближе с CI/CD и осознала насколько это  полезный итнструмент, который пригодится даже для личной разработки и написания лабораторных. Теперь процессы тестирования и сборки будут автоматизированы, а я всегда буду в курсе состояния своих работ. Полученные знания и навыки я обязательно буду применять в будущем для своих проектов.
